@@ -11,8 +11,8 @@
   :root{
     --bg-page:#FAF7FC;
     --surface:#FFFFFF;
-    --purple-deep:#4B1D80;
-    --purple-mid:#7C3AED;
+    --purple-deep:#6E1E33;
+    --purple-mid:#A32E4E;
     --pink-accent:#E0447F;
     --text-body:#3A2E4D;
     --text-soft:#6B5F80;
@@ -224,6 +224,56 @@
     background:var(--pink-accent);
   }
 
+  /* ---------- Ícones ---------- */
+  .icon-badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#F7E7EC;
+    color:var(--purple-deep);
+  }
+  .icon-badge svg{
+    width:60%;
+    height:60%;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .icon-badge.sm{
+    width:34px; height:34px;
+    border-radius:10px;
+  }
+  .icon-badge.md{
+    width:46px; height:46px;
+    margin-bottom:1rem;
+  }
+  .icon-badge.pink{
+    background:#FCE4EE;
+    color:var(--pink-accent);
+  }
+  .solucao-card.ai .icon-badge{
+    background:rgba(255,255,255,0.55);
+    color:var(--purple-deep);
+  }
+  .ticket-icon-row{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    margin-bottom:0.9rem;
+  }
+  .btn-whatsapp svg{
+    width:19px; height:19px;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+
   /* ---------- Section 3: soluções ---------- */
   .solucoes{ background:var(--surface); }
   .solucoes-grid{
@@ -251,8 +301,8 @@
     font-size:0.96rem;
   }
   .solucao-card.ai{
-    background:linear-gradient(150deg, #F6ECFB, #FCEAF2);
-    border-color:#E9C9EE;
+    background:linear-gradient(150deg, #F7E7EC, #FCEAF2);
+    border-color:#E7C3CE;
   }
   .tag-ai{
     display:inline-block;
@@ -269,7 +319,7 @@
 
   /* ---------- Section 4: investimento (ticket) ---------- */
   .investimento{
-    background:linear-gradient(180deg, #FAF7FC, #F3E9F8);
+    background:linear-gradient(180deg, #FAF7FC, #F5E5EA);
   }
   .ticket{
     display:grid;
@@ -315,7 +365,7 @@
     width:26px; height:26px;
     border-radius:50%;
     background:var(--investimento-bg, var(--bg-page));
-    background:linear-gradient(180deg, #FAF7FC, #F3E9F8);
+    background:linear-gradient(180deg, #FAF7FC, #F5E5EA);
   }
   .ticket-divider::before{ top:-13px; }
   .ticket-divider::after{ bottom:-13px; }
@@ -426,9 +476,24 @@
         </div>
         <div class="necessidade-card">
           <ul>
-            <li><span class="dot"></span><div><strong>Cadastro de atendimentos</strong>Registrar cada contato com histórico e contexto.</div></li>
-            <li><span class="dot"></span><div><strong>Data de follow-up</strong>Nenhum retorno fica esquecido ou perdido.</div></li>
-            <li><span class="dot"></span><div><strong>Dashboard integrado</strong>Visão clara do que precisa de atenção agora.</div></li>
+            <li>
+              <span class="icon-badge sm pink" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"></rect><path d="M9 3h6v3H9z"></path><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
+              </span>
+              <div><strong>Cadastro de atendimentos</strong>Registrar cada contato com histórico e contexto.</div>
+            </li>
+            <li>
+              <span class="icon-badge sm pink" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="16" y1="2" x2="16" y2="6"></line><path d="M12 12v3l2 1.2"></path></svg>
+              </span>
+              <div><strong>Data de follow-up</strong>Nenhum retorno fica esquecido ou perdido.</div>
+            </li>
+            <li>
+              <span class="icon-badge sm pink" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="20"></line><rect x="6" y="12" width="3" height="8"></rect><rect x="11" y="8" width="3" height="12"></rect><rect x="16" y="4" width="3" height="16"></rect></svg>
+              </span>
+              <div><strong>Dashboard integrado</strong>Visão clara do que precisa de atenção agora.</div>
+            </li>
           </ul>
         </div>
       </div>
@@ -441,18 +506,30 @@
       <h2>O que o sistema entrega na prática</h2>
       <div class="solucoes-grid">
         <div class="solucao-card">
+          <span class="icon-badge md" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"></rect><path d="M9 3h6v3H9z"></path><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
+          </span>
           <h3>Cadastro completo de atendimentos</h3>
           <p>Histórico centralizado por cliente, com dados de contato, contexto do atendimento e status atualizado em um só lugar.</p>
         </div>
         <div class="solucao-card">
+          <span class="icon-badge md" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="16" y1="2" x2="16" y2="6"></line><path d="M12 12v3l2 1.2"></path></svg>
+          </span>
           <h3>Follow-up com data definida</h3>
           <p>Cada atendimento recebe uma data de retorno. O sistema mantém isso visível, para que nenhuma oportunidade esfrie por esquecimento.</p>
         </div>
         <div class="solucao-card">
+          <span class="icon-badge md" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="20"></line><rect x="6" y="12" width="3" height="8"></rect><rect x="11" y="8" width="3" height="12"></rect><rect x="16" y="4" width="3" height="16"></rect></svg>
+          </span>
           <h3>Dashboard integrado</h3>
           <p>Painel gerencial com atendimentos em aberto, follow-ups do dia e indicadores de performance em tempo real.</p>
         </div>
         <div class="solucao-card ai">
+          <span class="icon-badge md" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </span>
           <span class="tag-ai">I.A. aplicada</span>
           <h3>Inteligência a favor do time</h3>
           <p>A I.A. organiza prioridades, gera resumos automáticos de atendimento e sinaliza follow-ups em risco de serem esquecidos.</p>
@@ -468,12 +545,22 @@
 
       <div class="ticket">
         <div class="ticket-half">
-          <h3>Implantação</h3>
+          <div class="ticket-icon-row">
+            <span class="icon-badge sm" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2c3 2.5 4.5 6 4.5 9.5S15 18 12 22c-3-4-4.5-7-4.5-10.5S9 4.5 12 2z"></path><circle cx="12" cy="10" r="1.6"></circle><path d="M8.5 17c-1.8.8-3 1.9-3 3.1"></path><path d="M15.5 17c1.8.8 3 1.9 3 3.1"></path></svg>
+            </span>
+            <h3>Implantação</h3>
+          </div>
           <div class="ticket-price mono">R$ 2.500,00</div>
           <p class="ticket-note">Pagamento único. Inclui configuração completa do sistema, estrutura inicial e treinamento da equipe.</p>
         </div>
         <div class="ticket-half ticket-divider">
-          <h3>Acesso por usuário</h3>
+          <div class="ticket-icon-row">
+            <span class="icon-badge sm" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"></circle><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"></path></svg>
+            </span>
+            <h3>Acesso por usuário</h3>
+          </div>
           <div class="ticket-price mono">R$ 150,00</div>
           <p class="ticket-note">Mensalidade por usuário ativo, com atualizações e suporte contínuo incluídos.</p>
         </div>
@@ -490,6 +577,7 @@
       <div class="cta-final">
         <p>Se fizer sentido para a Teste Gestão Comercial, dá para tirar qualquer dúvida agora mesmo, direto no WhatsApp.</p>
         <a class="btn btn-whatsapp" href="https://wa.me/5511984775286?text=Oi%2C%20vi%20a%20proposta%20para%20a%20empresa%20Teste%20Gest%C3%A3o%20Comercial%20e%20gostaria%20de%20tirar%20algumas%20d%C3%BAvidas." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 10.5c0 4 3.2 7 7 7 .9 0 1.5-.2 2-.4l2.3.6-.6-2.2c.3-.6.5-1.3.5-2 0-4-3.2-7-7-7s-7 3-7 4z"></path><path d="M10.5 9.8c.2-.3.5-.3.7 0l.6 1c.1.2.1.4 0 .6l-.4.6c-.1.2-.1.4 0 .6.4.7 1.3 1.4 2 1.7.2.1.4.1.6 0l.5-.5c.2-.2.4-.2.6-.1l1 .5c.3.1.3.4.1.7-.3.5-1 1-1.7 1-1.8 0-4-2.1-4.4-4-.1-.8.1-1.6.4-2z"></path></svg>
           Falar no WhatsApp
         </a>
       </div>
