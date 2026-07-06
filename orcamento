@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Comercial — Teste Gestão Comercial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-page:#FAF7FC;
+    --surface:#FFFFFF;
+    --purple-deep:#4B1D80;
+    --purple-mid:#7C3AED;
+    --pink-accent:#E0447F;
+    --text-body:#3A2E4D;
+    --text-soft:#6B5F80;
+    --border-soft:#E7DCF2;
+    --shadow-soft: 0 20px 45px -25px rgba(75,29,128,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-page);
+    color:var(--text-body);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    color:var(--purple-deep);
+    margin:0;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  .visually-hidden{
+    position:absolute;
+    width:1px;height:1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    white-space:nowrap;
+  }
+
+  /* ---------- Close / Reopen mechanism (pure CSS via checkbox hack) ---------- */
+  #close-toggle{ position:absolute; opacity:0; pointer-events:none; }
+
+  .closing-screen{
+    display:none;
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    background:linear-gradient(135deg, var(--purple-deep), var(--pink-accent));
+    color:#fff;
+    padding:2rem;
+  }
+
+  .closing-screen h2{
+    color:#fff;
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    max-width:32rem;
+  }
+
+  .closing-screen p{
+    color:rgba(255,255,255,0.85);
+    max-width:28rem;
+    margin-top:0.75rem;
+  }
+
+  #close-toggle:checked ~ .proposal-content{ display:none; }
+  #close-toggle:checked ~ .closing-screen{ display:flex; }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    padding:0.9rem 1.8rem;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.95rem;
+    text-decoration:none;
+    cursor:pointer;
+    border:none;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
+
+  .btn-reopen{
+    background:#fff;
+    color:var(--purple-deep);
+    margin-top:2rem;
+  }
+
+  .btn-close{
+    background:rgba(255,255,255,0.14);
+    color:#fff;
+    border:1px solid rgba(255,255,255,0.4);
+    font-size:0.85rem;
+    padding:0.6rem 1.2rem;
+  }
+  .btn-close:hover{ background:rgba(255,255,255,0.24); }
+
+  .btn-whatsapp{
+    background:var(--pink-accent);
+    color:#fff;
+    box-shadow:0 15px 30px -12px rgba(224,68,127,0.55);
+  }
+  .btn-whatsapp:hover{ box-shadow:0 18px 34px -10px rgba(224,68,127,0.65); }
+
+  /* ---------- Layout wrappers ---------- */
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+
+  section{ padding:5rem 0; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-mid) 55%, var(--pink-accent) 100%);
+    color:#fff;
+    padding:2.5rem 0 5rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:auto -10% -40% auto;
+    width:60vw; height:60vw;
+    max-width:640px; max-height:640px;
+    background:radial-gradient(closest-side, rgba(255,255,255,0.16), transparent);
+    pointer-events:none;
+  }
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:3.5rem;
+  }
+  .hero-brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.75);
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(2.1rem, 5.5vw, 3.4rem);
+    font-weight:600;
+    max-width:19ch;
+    line-height:1.15;
+    position:relative;
+  }
+  .hero p{
+    max-width:38rem;
+    margin-top:1.4rem;
+    font-size:1.1rem;
+    color:rgba(255,255,255,0.88);
+    position:relative;
+  }
+
+  /* ---------- Section 2: necessidade ---------- */
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--pink-accent);
+    font-weight:600;
+    margin-bottom:0.8rem;
+    display:block;
+  }
+
+  .necessidade-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:3rem;
+    align-items:start;
+    margin-top:2rem;
+  }
+
+  .necessidade-grid p{ color:var(--text-soft); font-size:1.05rem; }
+
+  .necessidade-card{
+    background:var(--surface);
+    border:1px solid var(--border-soft);
+    border-radius:18px;
+    padding:1.8rem;
+    box-shadow:var(--shadow-soft);
+  }
+  .necessidade-card ul{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:1.1rem;
+  }
+  .necessidade-card li{
+    display:flex;
+    gap:0.9rem;
+    align-items:flex-start;
+    font-size:0.95rem;
+    color:var(--text-body);
+  }
+  .necessidade-card li strong{ color:var(--purple-deep); display:block; margin-bottom:0.15rem; }
+  .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    margin-top:0.5rem;
+    flex-shrink:0;
+    background:var(--pink-accent);
+  }
+
+  /* ---------- Section 3: soluções ---------- */
+  .solucoes{ background:var(--surface); }
+  .solucoes-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1.5rem;
+    margin-top:2.5rem;
+  }
+  .solucao-card{
+    border:1px solid var(--border-soft);
+    border-radius:18px;
+    padding:1.8rem;
+    background:var(--bg-page);
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .solucao-card:hover{ border-color:var(--purple-mid); transform:translateY(-3px); }
+  .solucao-card h3{
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:0.6rem;
+  }
+  .solucao-card p{
+    margin:0;
+    color:var(--text-soft);
+    font-size:0.96rem;
+  }
+  .solucao-card.ai{
+    background:linear-gradient(150deg, #F6ECFB, #FCEAF2);
+    border-color:#E9C9EE;
+  }
+  .tag-ai{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    background:var(--purple-deep);
+    color:#fff;
+    padding:0.25rem 0.6rem;
+    border-radius:999px;
+    margin-bottom:0.7rem;
+  }
+
+  /* ---------- Section 4: investimento (ticket) ---------- */
+  .investimento{
+    background:linear-gradient(180deg, #FAF7FC, #F3E9F8);
+  }
+  .ticket{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-top:2.5rem;
+    background:var(--surface);
+    border-radius:20px;
+    box-shadow:var(--shadow-soft);
+    position:relative;
+    overflow:visible;
+  }
+  .ticket-half{
+    padding:2.4rem 2.2rem;
+    position:relative;
+  }
+  .ticket-half h3{
+    font-size:1rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--text-soft);
+    margin-bottom:0.6rem;
+  }
+  .ticket-price{
+    font-size:2.3rem;
+    font-weight:600;
+    color:var(--purple-deep);
+  }
+  .ticket-note{
+    margin-top:0.6rem;
+    font-size:0.9rem;
+    color:var(--text-soft);
+  }
+  .ticket-divider{
+    position:relative;
+    border-left:2px dashed var(--border-soft);
+  }
+  .ticket-divider::before,
+  .ticket-divider::after{
+    content:"";
+    position:absolute;
+    left:-13px;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--investimento-bg, var(--bg-page));
+    background:linear-gradient(180deg, #FAF7FC, #F3E9F8);
+  }
+  .ticket-divider::before{ top:-13px; }
+  .ticket-divider::after{ bottom:-13px; }
+
+  .prazo-strip{
+    margin-top:2rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    background:var(--purple-deep);
+    color:#fff;
+    padding:1.3rem 1.8rem;
+    border-radius:16px;
+  }
+  .prazo-strip .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.7);
+    display:block;
+  }
+  .prazo-strip .value{
+    font-family:'Fraunces', serif;
+    font-size:1.4rem;
+    font-weight:600;
+  }
+
+  .cta-final{
+    text-align:center;
+    margin-top:3rem;
+  }
+  .cta-final p{
+    color:var(--text-soft);
+    max-width:34rem;
+    margin:0 auto 1.4rem;
+  }
+
+  footer{
+    text-align:center;
+    padding:2.5rem 1.5rem 3rem;
+    color:var(--text-soft);
+    font-size:0.85rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px){
+    section{ padding:3.2rem 0; }
+    .hero{ padding:2rem 0 3.5rem; }
+    .hero-top{ margin-bottom:2.4rem; }
+    .necessidade-grid{ grid-template-columns:1fr; gap:2rem; }
+    .solucoes-grid{ grid-template-columns:1fr; }
+    .ticket{ grid-template-columns:1fr; }
+    .ticket-divider{
+      border-left:none;
+      border-top:2px dashed var(--border-soft);
+    }
+    .ticket-divider::before,
+    .ticket-divider::after{
+      left:50%;
+      top:-13px;
+      transform:translateX(-50%);
+    }
+    .ticket-divider::after{ top:auto; bottom:-13px; }
+    .prazo-strip{ flex-direction:column; align-items:flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="close-toggle" class="visually-hidden">
+
+<div class="proposal-content">
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <span class="hero-brand">Proposta Comercial · Teste Gestão Comercial</span>
+        <label for="close-toggle" class="btn btn-close">Fechar proposta ✕</label>
+      </div>
+      <h1>Atendimento sem follow-up é venda que se perde em silêncio.</h1>
+      <p>Uma proposta para dar à Teste Gestão Comercial um sistema próprio de cadastro de atendimentos, com follow-up agendado, dashboard integrado e inteligência artificial trabalhando nos bastidores.</p>
+    </div>
+  </header>
+
+  <section class="necessidade">
+    <div class="wrap">
+      <span class="eyebrow">01 · Entendendo sua necessidade</span>
+      <div class="necessidade-grid">
+        <div>
+          <h2>Hoje, cada atendimento depende da memória de alguém.</h2>
+          <p>
+            Sem um lugar único para registrar atendimentos, informações importantes ficam espalhadas
+            e datas de retorno acabam esquecidas. O resultado é perda de oportunidades e falta de
+            visibilidade sobre o que está, de fato, acontecendo com os clientes da Teste Gestão Comercial.
+          </p>
+          <p>
+            A necessidade é clara: um sistema simples para cadastrar atendimentos, definir uma
+            data de follow-up para cada um, e enxergar tudo isso de forma organizada em um
+            dashboard.
+          </p>
+        </div>
+        <div class="necessidade-card">
+          <ul>
+            <li><span class="dot"></span><div><strong>Cadastro de atendimentos</strong>Registrar cada contato com histórico e contexto.</div></li>
+            <li><span class="dot"></span><div><strong>Data de follow-up</strong>Nenhum retorno fica esquecido ou perdido.</div></li>
+            <li><span class="dot"></span><div><strong>Dashboard integrado</strong>Visão clara do que precisa de atenção agora.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solucoes">
+    <div class="wrap">
+      <span class="eyebrow">02 · Soluções</span>
+      <h2>O que o sistema entrega na prática</h2>
+      <div class="solucoes-grid">
+        <div class="solucao-card">
+          <h3>Cadastro completo de atendimentos</h3>
+          <p>Histórico centralizado por cliente, com dados de contato, contexto do atendimento e status atualizado em um só lugar.</p>
+        </div>
+        <div class="solucao-card">
+          <h3>Follow-up com data definida</h3>
+          <p>Cada atendimento recebe uma data de retorno. O sistema mantém isso visível, para que nenhuma oportunidade esfrie por esquecimento.</p>
+        </div>
+        <div class="solucao-card">
+          <h3>Dashboard integrado</h3>
+          <p>Painel gerencial com atendimentos em aberto, follow-ups do dia e indicadores de performance em tempo real.</p>
+        </div>
+        <div class="solucao-card ai">
+          <span class="tag-ai">I.A. aplicada</span>
+          <h3>Inteligência a favor do time</h3>
+          <p>A I.A. organiza prioridades, gera resumos automáticos de atendimento e sinaliza follow-ups em risco de serem esquecidos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="investimento">
+    <div class="wrap">
+      <span class="eyebrow">03 · Investimento</span>
+      <h2>Um investimento único e um custo previsível por usuário</h2>
+
+      <div class="ticket">
+        <div class="ticket-half">
+          <h3>Implantação</h3>
+          <div class="ticket-price mono">R$ 2.500,00</div>
+          <p class="ticket-note">Pagamento único. Inclui configuração completa do sistema, estrutura inicial e treinamento da equipe.</p>
+        </div>
+        <div class="ticket-half ticket-divider">
+          <h3>Acesso por usuário</h3>
+          <div class="ticket-price mono">R$ 150,00</div>
+          <p class="ticket-note">Mensalidade por usuário ativo, com atualizações e suporte contínuo incluídos.</p>
+        </div>
+      </div>
+
+      <div class="prazo-strip">
+        <div>
+          <span class="label">Prazo de desenvolvimento</span>
+          <span class="value">15 dias úteis</span>
+        </div>
+        <span class="mono" style="opacity:0.75; font-size:0.85rem;">a partir do aceite da proposta</span>
+      </div>
+
+      <div class="cta-final">
+        <p>Se fizer sentido para a Teste Gestão Comercial, dá para tirar qualquer dúvida agora mesmo, direto no WhatsApp.</p>
+        <a class="btn btn-whatsapp" href="https://wa.me/5511984775286?text=Oi%2C%20vi%20a%20proposta%20para%20a%20empresa%20Teste%20Gest%C3%A3o%20Comercial%20e%20gostaria%20de%20tirar%20algumas%20d%C3%BAvidas." target="_blank" rel="noopener">
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Proposta comercial preparada especialmente para Teste Gestão Comercial.
+  </footer>
+
+</div>
+
+<div class="closing-screen">
+  <h2>Proposta fechada. Ela continua disponível sempre que você quiser revisitar.</h2>
+  <p>Nenhuma informação foi perdida — é só reabrir para ver os detalhes novamente.</p>
+  <label for="close-toggle" class="btn btn-reopen">Reabrir proposta</label>
+</div>
+
+</body>
+</html>
